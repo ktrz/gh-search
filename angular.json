@@ -25,7 +25,10 @@
               "apps/gh-search/src/favicon.ico",
               "apps/gh-search/src/assets"
             ],
-            "styles": ["apps/gh-search/src/styles.scss"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
+              "apps/gh-search/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {

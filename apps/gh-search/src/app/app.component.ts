@@ -2,9 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'gh-search-root',
-  templateUrl: './app.component.html',
+  template: ` <router-outlet></router-outlet> `,
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  title = 'gh-search';
-}
+export class AppComponent {}

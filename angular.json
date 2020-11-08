@@ -119,6 +119,84 @@
           }
         }
       }
+    },
+    "gh-data-access": {
+      "projectType": "library",
+      "root": "libs/gh/data-access",
+      "sourceRoot": "libs/gh/data-access/src",
+      "prefix": "gh-search",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/gh/data-access/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/gh/data-access/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "auth": {
+      "projectType": "library",
+      "root": "libs/auth",
+      "sourceRoot": "libs/auth/src",
+      "prefix": "gh-search",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/auth/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/auth/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "observable-util": {
+      "projectType": "library",
+      "root": "libs/observable-util",
+      "sourceRoot": "libs/observable-util/src",
+      "prefix": "gh-search",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/observable-util/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/observable-util/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {
@@ -128,13 +206,18 @@
   "schematics": {
     "@nrwl/angular": {
       "application": {
-        "linter": "eslint"
+        "linter": "eslint",
+        "style": "scss"
       },
       "library": {
-        "linter": "eslint"
+        "linter": "eslint",
+        "style": "scss"
       },
       "storybook-configuration": {
         "linter": "eslint"
+      },
+      "component": {
+        "inlineTemplate": true
       }
     },
     "@nrwl/angular:application": {

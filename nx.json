@@ -29,6 +29,15 @@
     "gh-search-e2e": {
       "tags": [],
       "implicitDependencies": ["gh-search"]
+    },
+    "gh-data-access": {
+      "tags": []
+    },
+    "auth": {
+      "tags": []
+    },
+    "observable-util": {
+      "tags": []
     }
   }
 }

@@ -6,6 +6,7 @@ import {
   from,
   InMemoryCache,
   NextLink,
+  NormalizedCacheObject,
   Operation,
 } from '@apollo/client/core';
 import { HttpLink } from 'apollo-angular/http';
@@ -18,7 +19,7 @@ const uri = 'https://api.github.com/graphql';
 export function createApollo(
   httpLink: HttpLink,
   authService: AuthService
-): ApolloClientOptions<any> {
+): ApolloClientOptions<NormalizedCacheObject> {
   return {
     link: from([
       new ApolloLink((operation: Operation, forward: NextLink) => {

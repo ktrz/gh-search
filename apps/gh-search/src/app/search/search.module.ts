@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { GhDataAccessModule } from '@gh-search/gh/data-access';
 import { UserModule } from '../user/user.module';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [SearchComponent],
@@ -20,6 +21,7 @@ import { UserModule } from '../user/user.module';
     MatInputModule,
     MatButtonModule,
     UserModule,
-  ],
+    MatPaginatorModule
+  ]
 })
 export class SearchModule {}

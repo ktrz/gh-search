@@ -16,6 +16,7 @@ export const SearchUsers = gql`
       nodes {
         ... on User {
           name
+          avatarUrl
           followers {
             totalCount
           }

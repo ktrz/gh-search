@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Router } from '@angular/router';
 
 type GhToken = NonNullable<string> | null;
 const ghTokenKey = 'ghToken';
@@ -29,5 +28,6 @@ export class AuthService {
 
   logout() {
     this.authToken$.next(null);
+    localStorage.removeItem(ghTokenKey);
   }
 }

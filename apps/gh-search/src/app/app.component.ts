@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoggedInService } from './logged-in.service';
 
 @Component({
   selector: 'gh-search-root',
@@ -8,5 +9,8 @@ import { Component } from '@angular/core';
     </div>
   `,
   styleUrls: ['./app.component.scss'],
+  providers: [LoggedInService],
 })
-export class AppComponent {}
+export class AppComponent {
+  constructor(loggedInService: LoggedInService) {}
+}

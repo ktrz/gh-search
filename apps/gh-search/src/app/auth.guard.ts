@@ -19,17 +19,15 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> {
-    return this.authService
-      .isAuthenticated()
-      .pipe(
-        map(
-          (isAuthenticated) =>
-            isAuthenticated ||
-            this.router.createUrlTree(['login'], {
-              queryParams: route.queryParams,
-            })
-        )
-      );
+    return this.authService.isAuthenticated().pipe(
+      map(
+        (isAuthenticated) =>
+          isAuthenticated ||
+          this.router.createUrlTree(['login'], {
+            queryParams: route.queryParams,
+          })
+      )
+    );
   }
 
   canActivateChild(

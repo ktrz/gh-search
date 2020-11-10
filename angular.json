@@ -201,6 +201,56 @@
           "style": "scss"
         }
       }
+    },
+    "gh-search-token-auth": {
+      "root": "apps/gh-search-token-auth",
+      "sourceRoot": "apps/gh-search-token-auth/src",
+      "projectType": "application",
+      "prefix": "gh-search-token-auth",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/gh-search-token-auth",
+            "main": "apps/gh-search-token-auth/src/main.ts",
+            "tsConfig": "apps/gh-search-token-auth/tsconfig.app.json",
+            "assets": ["apps/gh-search-token-auth/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/gh-search-token-auth/src/environments/environment.ts",
+                  "with": "apps/gh-search-token-auth/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "gh-search-token-auth:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/gh-search-token-auth/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/gh-search-token-auth/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

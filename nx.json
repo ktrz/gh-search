@@ -38,6 +38,9 @@
     },
     "observable-util": {
       "tags": []
+    },
+    "gh-search-token-auth": {
+      "tags": []
     }
   }
 }

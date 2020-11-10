@@ -12,9 +12,8 @@ import { User } from '@gh-search/gh/data-access';
       ></gh-search-user>
     </div>
   `,
-  styleUrls: ['./users.component.scss']
+  styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent {
   @Input() users: User[] | null = null;
-
 }

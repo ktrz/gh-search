@@ -23,7 +23,11 @@ export class AuthGuard implements CanActivate, CanActivateChild {
       .isAuthenticated()
       .pipe(
         map(
-          (isAuthenticated) => isAuthenticated || this.router.parseUrl('/login')
+          (isAuthenticated) =>
+            isAuthenticated ||
+            this.router.createUrlTree(['login'], {
+              queryParams: route.queryParams,
+            })
         )
       );
   }

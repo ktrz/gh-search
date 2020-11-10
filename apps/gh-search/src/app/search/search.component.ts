@@ -2,7 +2,14 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { User, UsersService } from '@gh-search/gh/data-access';
-import { map, shareReplay, startWith, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import {
+  map,
+  shareReplay,
+  startWith,
+  switchMap,
+  tap,
+  withLatestFrom,
+} from 'rxjs/operators';
 import { PageEvent } from '@angular/material/paginator';
 
 @Component({
@@ -18,14 +25,17 @@ import { PageEvent } from '@angular/material/paginator';
       </mat-card>
     </form>
 
-    <mat-paginator [length]="pageLength$ | async"
-                   [pageSize]="pageSize$ | async"
-                   [pageIndex]="pageIndex$ | async"
-                   [pageSizeOptions]="[5, 10, 25, 100]"
-                   (page)="onPageChanged($event)"
+    <mat-paginator
+      [length]="pageLength$ | async"
+      [pageSize]="pageSize$ | async"
+      [pageIndex]="pageIndex$ | async"
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      (page)="onPageChanged($event)"
     ></mat-paginator>
 
-    <ng-container *ngIf="isLoading$ | async; then loading; else data"></ng-container>
+    <ng-container
+      *ngIf="isLoading$ | async; then loading; else data"
+    ></ng-container>
     <ng-template #loading>
       Loading...
     </ng-template>
@@ -33,12 +43,12 @@ import { PageEvent } from '@angular/material/paginator';
       <gh-search-users [users]="users$ | async"></gh-search-users>
     </ng-template>
   `,
-  styleUrls: ['./search.component.scss']
+  styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent {
   submit$ = new Subject();
   searchForm = new FormGroup({
-    query: new FormControl('')
+    query: new FormControl(''),
   });
 
   searchUser$ = this.submit$.pipe(

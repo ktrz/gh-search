@@ -1,5 +1,5 @@
 interface GraphQLType<T extends string = string> {
-  __typename: T
+  __typename: T;
 }
 
 interface RateLimit extends GraphQLType {

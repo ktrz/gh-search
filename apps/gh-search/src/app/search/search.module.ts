@@ -21,7 +21,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatInputModule,
     MatButtonModule,
     UserModule,
-    MatPaginatorModule
-  ]
+    MatPaginatorModule,
+  ],
 })
 export class SearchModule {}

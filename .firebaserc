@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "ghsearch-3e009": {
+      "hosting": {
+        "gh-search": [
+          "ghsearch-3e009"
+        ]
+      }
+    }
+  }
+}

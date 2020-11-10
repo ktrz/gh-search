@@ -25,7 +25,7 @@ app.get('/debug', (req, res) => {
   console.log('appUrl:', appUrl);
 
   res.sendStatus(200);
-})
+});
 
 app.get('/auth', (req, res) => {
   console.log(req.query);
@@ -36,15 +36,15 @@ app.get('/auth', (req, res) => {
     createXHR,
     url: `https://github.com/login/oauth/access_token`,
     headers: {
-      accept: 'application/json'
+      accept: 'application/json',
     },
     method: 'POST',
     crossDomain: true,
     body: {
       client_id: clientId,
       client_secret: clientSecret,
-      code
-    }
+      code,
+    },
   })
     .pipe(
       tap(

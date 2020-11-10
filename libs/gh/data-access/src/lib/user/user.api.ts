@@ -18,10 +18,17 @@ interface ItemsCount extends GraphQLType {
 }
 
 export interface ApiUser extends GraphQLType<'User'> {
+  login: string;
   name: string;
   avatarUrl: string;
   followers: ItemsCount;
   gists: ItemsCount;
+  url: string;
+  projectsUrl: string;
+  websiteUrl: string;
+  bio: string;
+  bioHTML: string;
+  location: string;
 }
 
 interface ApiUserData extends GraphQLType {

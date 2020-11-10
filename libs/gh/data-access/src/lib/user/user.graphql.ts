@@ -15,6 +15,7 @@ export const SearchUsers = gql`
       }
       nodes {
         ... on User {
+          login
           name
           avatarUrl
           followers {
@@ -23,6 +24,12 @@ export const SearchUsers = gql`
           gists {
             totalCount
           }
+          url
+          projectsUrl
+          websiteUrl
+          bioHTML
+          bio
+          location
         }
       }
     }

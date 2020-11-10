@@ -29,10 +29,16 @@ const toUser = (api: ApiUser) => {
   switch (api.__typename) {
     case 'User':
       return new User(
+        api.login,
         api.name,
         api.avatarUrl,
         api.followers.totalCount,
-        api.gists.totalCount
+        api.gists.totalCount,
+        api.url,
+        api.projectsUrl,
+        api.websiteUrl,
+        api.bio,
+        api.location
       );
   }
 };

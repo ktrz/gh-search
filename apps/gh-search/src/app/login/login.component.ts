@@ -14,7 +14,11 @@ import { environment } from '../../environments/environment';
       <mat-card-content>
         <div class="login-container">
           <div class="login-column">
-            <button mat-raised-button color="primary" (click)="loginWithGitHub()">
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="loginWithGitHub()"
+            >
               Login with Github
             </button>
           </div>
@@ -28,19 +32,20 @@ import { environment } from '../../environments/environment';
                 required
               />
               <mat-error *ngIf="loginForm.controls.ghToken.invalid"
-              >Invalid token</mat-error
+                >Invalid token</mat-error
               >
             </mat-form-field>
-            <button mat-raised-button color="primary" (click)="loginWithToken()">
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="loginWithToken()"
+            >
               Login
             </button>
           </form>
         </div>
-
       </mat-card-content>
-      <mat-card-actions>
-
-      </mat-card-actions>
+      <mat-card-actions> </mat-card-actions>
     </mat-card>
   `,
   styleUrls: ['./login.component.scss'],
@@ -55,15 +60,18 @@ export class LoginComponent {
   loginWithGitHub() {
     const queryParams = {
       client_id: environment.clientId,
-      redirect_uri: environment.authRedirectUrl
+      redirect_uri: environment.authRedirectUrl,
     };
     type QueryParams = typeof queryParams;
     type QueryParamsKeys = keyof QueryParams;
 
     const queryParamsString = (Object.keys(queryParams) as QueryParamsKeys[])
-      .map((key: keyof QueryParams) => [key, encodeURIComponent(queryParams[key])])
-      .map(param => param.join('='))
-      .join('&')
+      .map((key: keyof QueryParams) => [
+        key,
+        encodeURIComponent(queryParams[key]),
+      ])
+      .map((param) => param.join('='))
+      .join('&');
 
     window.location.href = `${environment.ghAuthorizeUrl}?${queryParamsString}`;
   }

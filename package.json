@@ -48,6 +48,7 @@
     "firebase": "^7.0.0 || ^8.0.0",
     "graphql": "^15.0.0",
     "rxjs": "~6.5.5",
+    "xmlhttprequest": "^1.8.0",
     "zone.js": "^0.10.2"
   },
   "devDependencies": {
@@ -70,7 +71,7 @@
     "@typescript-eslint/parser": "4.3.0",
     "codelyzer": "~5.0.1",
     "cypress": "^4.1.0",
-    "dotenv": "6.2.0",
+    "dotenv": "^8.2.0",
     "eslint": "7.10.0",
     "eslint-config-prettier": "6.0.0",
     "eslint-plugin-cypress": "^2.10.3",

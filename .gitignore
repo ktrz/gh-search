@@ -42,3 +42,4 @@ testem.log
 Thumbs.db
 /github-schema.graphql
 /apps/gh-search/src/environments/environment.devl.ts
+.env

@@ -1,3 +1,4 @@
+import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
@@ -6,12 +7,11 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { Observable } from 'rxjs';
-import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
 import { AuthService } from '@gh-search/auth';
+import { Observable, of } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate, CanActivateChild {
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -19,13 +19,17 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> {
-    return this.authService.isAuthenticated().pipe(
-      map(
-        (isAuthenticated) =>
-          isAuthenticated ||
-          this.router.createUrlTree(['login'], {
-            queryParams: route.queryParams,
-          })
+    return of(route.queryParams.ghToken).pipe(
+      tap((token) => {
+        if (token) {
+          this.authService.authenticate(token);
+        }
+      }),
+      switchMap(() => this.authService.isAuthenticated()),
+      map((isAuthenticated) =>
+        isAuthenticated
+          ? this.router.parseUrl('/')
+          : this.router.parseUrl('/login')
       )
     );
   }
@@ -34,12 +38,18 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> {
-    return this.authService
-      .isAuthenticated()
-      .pipe(
-        map(
-          (isAuthenticated) => isAuthenticated || this.router.parseUrl('/login')
-        )
-      );
+    return of(childRoute.queryParams.ghToken).pipe(
+      tap((token) => {
+        if (token) {
+          this.authService.authenticate(token);
+        }
+      }),
+      switchMap(() => this.authService.isAuthenticated()),
+      map((isAuthenticated) =>
+        isAuthenticated
+          ? this.router.parseUrl('/')
+          : this.router.parseUrl('/login')
+      )
+    );
   }
 }

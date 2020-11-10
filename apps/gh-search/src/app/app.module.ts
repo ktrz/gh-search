@@ -5,11 +5,12 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { AuthGuard } from './auth.guard';
+import { IsAuthGuard } from './is-auth.guard';
 import { LoginComponent } from './login/login.component';
 import { LoginModule } from './login/login.module';
 import { SearchComponent } from './search/search.component';
 import { SearchModule } from './search/search.module';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,9 +27,14 @@ import { SearchModule } from './search/search.module';
           component: LoginComponent,
         },
         {
+          path: 'auth',
+          canActivate: [AuthGuard],
+          component: SearchComponent,
+        },
+        {
           path: 'search',
           component: SearchComponent,
-          canActivate: [AuthGuard],
+          canActivate: [IsAuthGuard],
         },
         {
           path: '**',
@@ -38,7 +44,7 @@ import { SearchModule } from './search/search.module';
       { initialNavigation: 'enabled' }
     ),
   ],
-  providers: [AuthGuard],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

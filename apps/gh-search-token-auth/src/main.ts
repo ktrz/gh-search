@@ -4,9 +4,10 @@ import { catchError, first, tap } from 'rxjs/operators';
 import { XMLHttpRequest } from 'xmlhttprequest';
 import { EMPTY } from 'rxjs';
 import { environment } from './environments/environment';
-import * as dotenv from 'dotenv';
 
-dotenv.config();
+if (!environment.production) {
+  require('dotenv').config();
+}
 
 function createXHR() {
   return new XMLHttpRequest();
@@ -27,15 +28,15 @@ app.get('/auth', (req, res) => {
     createXHR,
     url: `https://github.com/login/oauth/access_token`,
     headers: {
-      accept: 'application/json',
+      accept: 'application/json'
     },
     method: 'POST',
     crossDomain: true,
     body: {
       client_id: clientId,
       client_secret: clientSecret,
-      code,
-    },
+      code
+    }
   })
     .pipe(
       tap(

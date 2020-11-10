@@ -19,6 +19,14 @@ const clientSecret = process.env.GH_CLIENT_SECRET || '';
 const clientId = process.env.GH_CLIENT_ID || environment.clientId;
 const appUrl = process.env.FE_APP_URL || environment.appUrl;
 
+app.get('/debug', (req, res) => {
+  console.log('clientSecret:', clientSecret);
+  console.log('clientId:', clientId);
+  console.log('appUrl:', appUrl);
+
+  res.sendStatus(200);
+})
+
 app.get('/auth', (req, res) => {
   console.log(req.query);
 

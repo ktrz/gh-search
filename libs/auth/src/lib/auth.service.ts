@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 type GhToken = NonNullable<string> | null;
 const ghTokenKey = 'ghToken';
@@ -21,7 +22,7 @@ export class AuthService {
     return this.authToken$.asObservable();
   }
 
-  authenticate(ghToken: string) {
+  setToken(ghToken: string) {
     localStorage.setItem(ghTokenKey, ghToken);
     this.authToken$.next(ghToken);
   }

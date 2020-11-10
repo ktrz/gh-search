@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@gh-search/auth';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'gh-search-login',
@@ -11,25 +12,34 @@ import { Router } from '@angular/router';
         Login
       </mat-card-title>
       <mat-card-content>
-        <form [formGroup]="loginForm">
-          <mat-form-field>
-            <mat-label>GitHub access token</mat-label>
-            <input
-              matInput
-              placeholder="Enter your GH token"
-              formControlName="ghToken"
-              required
-            />
-            <mat-error *ngIf="loginForm.controls.ghToken.invalid"
+        <div class="login-container">
+          <div class="login-column">
+            <button mat-raised-button color="primary" (click)="loginWithGitHub()">
+              Login with Github
+            </button>
+          </div>
+          <form [formGroup]="loginForm" class="login-column">
+            <mat-form-field>
+              <mat-label>GH personal access token</mat-label>
+              <input
+                matInput
+                placeholder="Enter your personal access token"
+                formControlName="ghToken"
+                required
+              />
+              <mat-error *ngIf="loginForm.controls.ghToken.invalid"
               >Invalid token</mat-error
-            >
-          </mat-form-field>
-        </form>
+              >
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="loginWithToken()">
+              Login
+            </button>
+          </form>
+        </div>
+
       </mat-card-content>
       <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="login()">
-          Login
-        </button>
+
       </mat-card-actions>
     </mat-card>
   `,
@@ -42,8 +52,24 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  login() {
-    this.authService.authenticate(this.loginForm.value.ghToken);
+  loginWithGitHub() {
+    const queryParams = {
+      client_id: environment.clientId,
+      redirect_uri: environment.authRedirectUrl
+    };
+    type QueryParams = typeof queryParams;
+    type QueryParamsKeys = keyof QueryParams;
+
+    const queryParamsString = (Object.keys(queryParams) as QueryParamsKeys[])
+      .map((key: keyof QueryParams) => [key, encodeURIComponent(queryParams[key])])
+      .map(param => param.join('='))
+      .join('&')
+
+    window.location.href = `${environment.ghAuthorizeUrl}?${queryParamsString}`;
+  }
+
+  loginWithToken() {
+    this.authService.setToken(this.loginForm.value.ghToken);
     this.router.navigateByUrl('/');
   }
 }

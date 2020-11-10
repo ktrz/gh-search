@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     return of(route.queryParams.ghToken).pipe(
       tap((token) => {
         if (token) {
-          this.authService.authenticate(token);
+          this.authService.setToken(token);
         }
       }),
       switchMap(() => this.authService.isAuthenticated()),
@@ -41,7 +41,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     return of(childRoute.queryParams.ghToken).pipe(
       tap((token) => {
         if (token) {
-          this.authService.authenticate(token);
+          this.authService.setToken(token);
         }
       }),
       switchMap(() => this.authService.isAuthenticated()),

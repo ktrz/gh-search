@@ -99,7 +99,7 @@ __webpack_require__.r(__webpack_exports__);
 const environment = {
     production: false,
     clientId: 'ed5140ba0fff8a02f920',
-    appUrl: 'http://localhost:4200/auth'
+    appUrl: 'http://localhost:4200/auth',
 };
 
 
@@ -149,16 +149,17 @@ app.get('/auth', (req, res) => {
         createXHR,
         url: `https://github.com/login/oauth/access_token`,
         headers: {
-            accept: 'application/json'
+            accept: 'application/json',
         },
         method: 'POST',
         crossDomain: true,
         body: {
             client_id: clientId,
             client_secret: clientSecret,
-            code
-        }
-    }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])(response => {
+            code,
+        },
+    })
+        .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])((response) => {
         if (response.status === 200 && response.response.access_token) {
             res.redirect(`${appUrl}?ghToken=${response.response.access_token}`);
         }
@@ -170,7 +171,8 @@ app.get('/auth', (req, res) => {
         console.warn(error);
         res.status(400).send(error);
         return rxjs__WEBPACK_IMPORTED_MODULE_4__["EMPTY"];
-    })), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["first"])()).subscribe();
+    })), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["first"])())
+        .subscribe();
 });
 const port = process.env.PORT || 3333;
 const server = app.listen(port, () => {

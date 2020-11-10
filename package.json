@@ -26,6 +26,7 @@
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
+    "heroku-postbuild": "ng build gh-search-token-auth --prod",
     "start-gh-search-token-auth:prod": "node dist/apps/gh-search-token-auth/main"
   },
   "private": true,

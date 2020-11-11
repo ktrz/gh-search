@@ -1,98 +1,33 @@
-# GhSearch
+# Git Hub Search
 
-This project was generated using [Nx](https://nx.dev).
+## Frontend
 
-<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+The project contains Angular app which allows user to search for GitHub users. It uses [GraphQL API](https://docs.github.com/en/free-pro-team@latest/graphql)
 
-🔎 **Nx is a set of Extensible Dev Tools for Monorepos.**
+To run the frontend app in development mode you need to set `clientId` inside of `apps/gh-search/src/environments/environment.ts` file to your own OAuth GitHub app ([GH dev settings](https://github.com/settings/developers)).
+```
+export const environment = {
+  production: false,
+  clientId: '<your-gh-client-id>',
+  authRedirectUrl: 'http://localhost:3333/auth',
+  ghAuthorizeUrl: 'https://github.com/login/oauth/authorize',
+};
+```
+The `clientSecret` will be used by BE app to generate user access tokens.
+Then just run `ng serve gh-search` to start development app. Navigate to [localhost:4200](http://localhost:4200) to see the app.
 
-## Quick Start & Documentation
+To login to the running app you can either login via your GitHub account or you can generate your [personal access token](https://github.com/settings/tokens) and use it in the login input provided.
 
-[Nx Documentation](https://nx.dev/angular)
 
-[10-minute video showing all Nx features](https://nx.dev/angular/getting-started/what-is-nx)
+## Backend
 
-[Interactive Tutorial](https://nx.dev/angular/tutorial/01-create-application)
+The backend project contains a NodeJS express app which is responsible for generating access tokens for user using [Web application flow](https://docs.github.com/en/free-pro-team@latest/developers/apps/authorizing-oauth-apps).
 
-## Adding capabilities to your workspace
+To run the app locally you need to create a `.env` file in the repo root directory with the following env variables
+```
+GH_CLIENT_SECRET=<your-gh-client-secret>
+```
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+Then just run `ng serve gh-search-token-auth` to start development server.
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
-
-Below are our core plugins:
-
-- [Angular](https://angular.io)
-  - `ng add @nrwl/angular`
-- [React](https://reactjs.org)
-  - `ng add @nrwl/react`
-- Web (no framework frontends)
-  - `ng add @nrwl/web`
-- [Nest](https://nestjs.com)
-  - `ng add @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `ng add @nrwl/express`
-- [Node](https://nodejs.org)
-  - `ng add @nrwl/node`
-
-There are also many [community plugins](https://nx.dev/nx-community) you could add.
-
-## Generate an application
-
-Run `ng g @nrwl/angular:app my-app` to generate an application.
-
-> You can use any of the plugins above to generate applications as well.
-
-When using Nx, you can create multiple applications and libraries in the same workspace.
-
-## Generate a library
-
-Run `ng g @nrwl/angular:lib my-lib` to generate a library.
-
-> You can also use any of the plugins above to generate libraries as well.
-
-Libraries are sharable across libraries and applications. They can be imported from `@gh-search/mylib`.
-
-## Development server
-
-Run `ng serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng g component my-component --project=my-app` to generate a new component.
-
-## Build
-
-Run `ng build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test my-app` to execute the unit tests via [Jest](https://jestjs.io).
-
-Run `nx affected:test` to execute the unit tests affected by a change.
-
-## Running end-to-end tests
-
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
-
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
-
-## Understand your workspace
-
-Run `nx dep-graph` to see a diagram of the dependencies of your projects.
-
-## Further help
-
-Visit the [Nx Documentation](https://nx.dev/angular) to learn more.
-
-## ☁ Nx Cloud
-
-### Computation Memoization in the Cloud
-
-<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
-
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
-
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
-
-Visit [Nx Cloud](https://nx.app/) to learn more.
+You can check that server is working correctly by going to [localhost:3333/debug](http://localhost:3333/debug)
